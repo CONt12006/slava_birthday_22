@@ -1,0 +1,1751 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>С днем рождения, Легенда!</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            scroll-behavior: auto !important;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+            user-select: none;
+            color: #e2e8f0;
+        }
+
+        .screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            z-index: 1;
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+
+        .screen.hidden {
+            display: none !important;
+        }
+
+        .container {
+            text-align: center;
+            padding: 60px 20px 40px;
+            width: 100%;
+        }
+
+        .subtitle {
+            color: rgba(6, 182, 212, 0.9);
+            font-size: 14px;
+            letter-spacing: 4px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+
+        h1 {
+            color: #fff;
+            font-size: 3rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+        }
+
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin: 40px 0;
+        }
+
+        .time-box {
+            background: rgba(6, 182, 212, 0.1);
+            border: 1px solid rgba(6, 182, 212, 0.3);
+            border-radius: 15px;
+            padding: 20px;
+            min-width: 100px;
+            backdrop-filter: blur(5px);
+        }
+
+        .time-value {
+            color: #06b6d4;
+            font-size: 3rem;
+            font-weight: bold;
+            display: block;
+        }
+
+        .time-label {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .gift-screen {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            align-items: center;
+        }
+
+        .gift-text {
+            color: white;
+            font-size: 1.5rem;
+            margin-bottom: 40px;
+            letter-spacing: 2px;
+            font-weight: 500;
+        }
+
+        .gift-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #f97316, #fb923c);
+            border: none;
+            padding: 50px 80px;
+            border-radius: 30px;
+            font-size: 100px;
+            cursor: pointer;
+            box-shadow: 0 15px 40px rgba(249, 115, 22, 0.3);
+            transition: all 0.3s;
+            animation: bounce 2s infinite;
+        }
+
+        .gift-button:hover { transform: scale(1.1); box-shadow: 0 20px 50px rgba(249, 115, 22, 0.5); }
+        .gift-button:active { transform: scale(0.95); }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .gift-hint {
+            color: rgba(255,255,255,0.6);
+            margin-top: 30px;
+            font-size: 1.2rem;
+        }
+
+        .letter-screen {
+            background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 50%, #0f172a 100%);
+            align-items: flex-start;
+            padding-top: 40px;
+        }
+
+        .letter-container {
+            max-width: 800px;
+            padding: 40px 20px 100px;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        .letter-content {
+            text-align: center;
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 50px 40px;
+            border: 1px solid rgba(6, 182, 212, 0.3);
+            width: 100%;
+        }
+
+        .letter-title {
+            color: #06b6d4;
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+        }
+
+        .letter-text {
+            color: rgba(255,255,255,0.9);
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+
+        .letter-signature {
+            color: #f97316;
+            font-weight: bold;
+            margin-top: 30px;
+            text-align: right;
+            font-size: 1.2rem;
+        }
+
+        .memories-btn-in-letter {
+            background: linear-gradient(135deg, #06b6d4, #3b82f6);
+            color: white;
+            border: none;
+            padding: 18px 45px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 40px;
+            transition: all 0.3s;
+            box-shadow: 0 5px 20px rgba(6, 182, 212, 0.3);
+            display: inline-block;
+        }
+
+        .memories-btn-in-letter:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(6, 182, 212, 0.5);
+        }
+
+        .memories-screen {
+            background: linear-gradient(135deg, #020617 0%, #0f172a 100%);
+            overflow: hidden;
+            position: relative;
+            align-items: center;
+        }
+
+        .memories-container {
+            max-width: 100%;
+            padding: 40px 20px 100px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .memories-title {
+            color: #f97316;
+            font-size: 3rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 10px rgba(249, 115, 22, 0.3);
+        }
+
+        .carousel-wrapper {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+            padding: 40px 0;
+            margin-bottom: 40px;
+        }
+
+        .carousel-wrapper::before,
+        .carousel-wrapper::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            width: 150px;
+            height: 100%;
+            z-index: 5;
+            pointer-events: none;
+        }
+
+        .carousel-wrapper::before {
+            left: 0;
+            background: linear-gradient(to right, #020617 0%, transparent 100%);
+        }
+
+        .carousel-wrapper::after {
+            right: 0;
+            background: linear-gradient(to left, #020617 0%, transparent 100%);
+        }
+
+        .carousel-track {
+            display: flex;
+            gap: 30px;
+            animation: scroll 30s linear infinite;
+            width: max-content;
+        }
+
+        .carousel-track:hover { animation-play-state: paused; }
+
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        .carousel-photo {
+            background: #1e293b;
+            padding: 12px 12px 35px 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            border: 1px solid rgba(255,255,255,0.1);
+            flex-shrink: 0;
+            transition: transform 0.3s;
+        }
+
+        .carousel-photo:hover {
+            transform: scale(1.1) rotate(0deg) !important;
+            z-index: 10;
+            border-color: #f97316;
+        }
+
+        .carousel-photo:nth-child(odd) { transform: rotate(-3deg); }
+        .carousel-photo:nth-child(even) { transform: rotate(3deg); }
+        .carousel-photo:nth-child(3n) { transform: rotate(-5deg); }
+
+        .carousel-photo img {
+            width: 220px;
+            height: 280px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .final-text {
+            color: rgba(255,255,255,0.7);
+            font-size: 1.2rem;
+            margin: 30px 0;
+            font-style: italic;
+        }
+
+        .get-gift-btn {
+            background: linear-gradient(135deg, #f97316, #fb923c);
+            color: white;
+            border: none;
+            padding: 20px 60px;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 30px;
+            transition: all 0.3s;
+            box-shadow: 0 5px 20px rgba(249, 115, 22, 0.3);
+        }
+
+        .get-gift-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(249, 115, 22, 0.5);
+        }
+
+        .game-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #0f172a 0%, #020617 100%);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+            overflow: hidden;
+        }
+
+        .game-screen.active {
+            display: flex;
+        }
+
+        .game-container {
+            background: rgba(30, 41, 59, 0.8);
+            backdrop-filter: blur(10px);
+            border-radius: 30px;
+            padding: 40px;
+            max-width: 800px;
+            width: 90%;
+            border: 1px solid rgba(6, 182, 212, 0.3);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+            text-align: center;
+            max-height: 95vh;
+            overflow-y: auto;
+        }
+
+        .game-title {
+            color: #06b6d4;
+            font-size: 2rem;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .game-message {
+            background: rgba(6, 182, 212, 0.15);
+            border: 1px solid #06b6d4;
+            border-radius: 15px;
+            padding: 15px 30px;
+            margin: 0 auto 30px;
+            text-align: center;
+            color: #fff;
+            font-size: 1rem;
+            max-width: 500px;
+            transition: all 0.3s;
+        }
+
+        .memory-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .memory-card {
+            aspect-ratio: 1;
+            background: linear-gradient(135deg, #3b82f6, #06b6d4);
+            border-radius: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2.5rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            user-select: none;
+        }
+
+        .memory-card:hover { transform: scale(1.05); }
+        .memory-card.flipped { background: linear-gradient(135deg, #1e293b, #334155); border: 1px solid #06b6d4; }
+        .memory-card.matched {
+            background: linear-gradient(135deg, #10b981, #059669);
+            animation: matchPulse 0.5s;
+        }
+
+        @keyframes matchPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .tic-tac-toe-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            max-width: 350px;
+            margin: 0 auto;
+        }
+
+        .tic-cell {
+            aspect-ratio: 1;
+            background: rgba(255,255,255,0.05);
+            border: 2px solid rgba(255,255,255,0.1);
+            border-radius: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 3rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            user-select: none;
+        }
+
+        .tic-cell:hover { background: rgba(255,255,255,0.1); transform: scale(1.05); }
+        .tic-cell.taken { cursor: not-allowed; }
+        .tic-cell.x { color: #f97316; }
+        .tic-cell.o { color: #06b6d4; }
+
+        .alien-container {
+            position: relative;
+            max-width: 700px;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        #alienCanvas {
+            display: block;
+            background: linear-gradient(180deg, #020617 0%, #0f172a 100%);
+            border-radius: 15px;
+            margin: 0 auto;
+            max-width: 100%;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            border: 1px solid rgba(6, 182, 212, 0.3);
+        }
+
+        .alien-controls-hint {
+            color: rgba(255,255,255,0.6);
+            font-size: 0.9rem;
+            margin-top: 15px;
+        }
+
+        .mobile-controls {
+            display: none;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            margin-top: 20px;
+            padding: 15px;
+            background: rgba(0,0,0,0.3);
+            border-radius: 20px;
+            border: 1px solid rgba(6, 182, 212, 0.3);
+        }
+
+        .control-btn {
+            flex: 1;
+            background: linear-gradient(135deg, #3b82f6, #06b6d4);
+            color: white;
+            border: none;
+            padding: 20px 10px;
+            border-radius: 15px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s;
+            box-shadow: 0 5px 15px rgba(6, 182, 212, 0.3);
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+        }
+
+        .control-btn:active,
+        .control-btn.pressed {
+            transform: scale(0.95);
+            background: linear-gradient(135deg, #06b6d4, #3b82f6);
+        }
+
+        .control-btn.fire-btn {
+            background: linear-gradient(135deg, #f97316, #ef4444);
+            box-shadow: 0 5px 15px rgba(249, 115, 22, 0.4);
+            flex: 1.5;
+        }
+
+        .control-btn.fire-btn:active,
+        .control-btn.fire-btn.pressed {
+            background: linear-gradient(135deg, #ef4444, #f97316);
+        }
+
+        .control-group {
+            display: flex;
+            gap: 10px;
+            flex: 2;
+        }
+
+        @media (max-width: 768px) {
+            .mobile-controls { display: flex; }
+            .alien-controls-hint { display: none; }
+        }
+
+        .hangman-container {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .hangman-drawing {
+            width: 200px;
+            height: 250px;
+            margin: 0 auto 30px;
+            position: relative;
+        }
+
+        .hangman-drawing svg line,
+        .hangman-drawing svg circle {
+            stroke: #06b6d4;
+            stroke-width: 4;
+            fill: none;
+        }
+
+        .hangman-part {
+            display: none;
+        }
+
+        .hangman-part.visible {
+            display: block;
+            animation: drawPart 0.5s;
+        }
+
+        @keyframes drawPart {
+            from { stroke-dasharray: 100; stroke-dashoffset: 100; }
+            to { stroke-dashoffset: 0; }
+        }
+
+        .word-display {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .letter-slot {
+            width: 50px;
+            height: 60px;
+            border-bottom: 3px solid #06b6d4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2rem;
+            color: #fff;
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+
+        .keyboard {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            flex-wrap: wrap;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .key-btn {
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, #3b82f6, #06b6d4);
+            border: none;
+            border-radius: 10px;
+            color: white;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+        }
+
+        .key-btn:hover:not(:disabled) {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(6, 182, 212, 0.4);
+        }
+
+        .key-btn:disabled {
+            background: rgba(255,255,255,0.1);
+            cursor: not-allowed;
+            opacity: 0.5;
+        }
+
+        .key-btn.correct {
+            background: linear-gradient(135deg, #10b981, #059669);
+        }
+
+        .key-btn.wrong {
+            background: rgba(239, 68, 68, 0.5);
+        }
+
+        .boss-arena {
+            position: relative;
+            width: 100%;
+            max-width: 700px;
+            height: 500px;
+            margin: 0 auto;
+            background: radial-gradient(ellipse at center, #1e3a8a 0%, #0f172a 100%);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 2px solid rgba(249, 115, 22, 0.3);
+        }
+
+        .boss-hp-bar {
+            position: absolute;
+            top: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            height: 25px;
+            background: rgba(0,0,0,0.5);
+            border-radius: 15px;
+            overflow: hidden;
+            border: 2px solid rgba(255,255,255,0.3);
+            z-index: 10;
+        }
+
+        .boss-hp-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #ef4444, #f97316, #ef4444);
+            transition: width 0.3s;
+            box-shadow: 0 0 10px rgba(249, 115, 22, 0.5);
+        }
+
+        .boss-hp-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 14px;
+            font-weight: bold;
+            z-index: 11;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+        }
+
+        .boss-counter {
+            position: absolute;
+            top: 50px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #f97316;
+            font-size: 1.2rem;
+            font-weight: bold;
+            z-index: 10;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
+            white-space: nowrap;
+        }
+
+        .boss {
+            position: absolute;
+            width: 140px;
+            height: 140px;
+            cursor: pointer;
+            transition: transform 0.1s;
+            z-index: 5;
+            filter: drop-shadow(0 0 25px rgba(249, 115, 22, 0.6));
+            animation: bossGlow 1s infinite alternate;
+        }
+
+        .boss img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+            pointer-events: none;
+        }
+
+        .boss:active {
+            transform: scale(0.9);
+        }
+
+        .boss.hit {
+            animation: bossHit 0.3s !important;
+        }
+
+        @keyframes bossGlow {
+            from { filter: drop-shadow(0 0 20px rgba(249, 115, 22, 0.5)); }
+            to { filter: drop-shadow(0 0 45px rgba(249, 115, 22, 0.9)); }
+        }
+
+        @keyframes bossHit {
+            0% { transform: scale(1); filter: brightness(1) drop-shadow(0 0 20px rgba(249, 115, 22, 0.5)); }
+            50% { transform: scale(0.85) rotate(10deg); filter: brightness(2) drop-shadow(0 0 40px rgba(255,255,255,0.9)); }
+            100% { transform: scale(1) rotate(0); filter: brightness(1) drop-shadow(0 0 20px rgba(249, 115, 22, 0.5)); }
+        }
+
+        .damage-number {
+            position: absolute;
+            color: #ef4444;
+            font-size: 2rem;
+            font-weight: bold;
+            pointer-events: none;
+            z-index: 20;
+            animation: damageFloat 1s forwards;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+        }
+
+        @keyframes damageFloat {
+            0% { opacity: 1; transform: translateY(0) scale(1); }
+            100% { opacity: 0; transform: translateY(-80px) scale(1.5); }
+        }
+
+        .congratulations {
+            text-align: center;
+            padding: 40px;
+        }
+
+        .congratulations h2 {
+            color: #f97316;
+            font-size: 3rem;
+            margin-bottom: 20px;
+            animation: fadeInUp 1s;
+        }
+
+        .congratulations p {
+            color: rgba(255,255,255,0.9);
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .boss-victory-img {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 30px;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(249, 115, 22, 0.5);
+            animation: victoryPulse 2s infinite;
+            border: 2px solid #f97316;
+        }
+
+        .boss-victory-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        @keyframes victoryPulse {
+            0%, 100% { transform: scale(1); box-shadow: 0 10px 40px rgba(249, 115, 22, 0.5); }
+            50% { transform: scale(1.05); box-shadow: 0 15px 60px rgba(249, 115, 22, 0.8); }
+        }
+
+        .hype-animation {
+            font-size: 3rem;
+            margin: 30px 0;
+            animation: hype 1.5s infinite;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes hype {
+            0%, 100% { transform: scale(1) rotate(0deg); }
+            25% { transform: scale(1.1) rotate(-5deg); }
+            75% { transform: scale(1.1) rotate(5deg); }
+        }
+
+        .transition-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #0f172a 0%, #020617 100%);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 200;
+        }
+
+        .transition-screen.active {
+            display: flex;
+            animation: fadeIn 0.5s;
+        }
+
+        .transition-text {
+            color: #06b6d4;
+            font-size: 2rem;
+            text-align: center;
+            font-weight: bold;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        @media (max-width: 768px) {
+            .letter-container { 
+                padding: 20px 10px 100px;
+            }
+            .gift-button { padding: 30px 50px; font-size: 60px; }
+            .memories-title { font-size: 2rem; }
+            .carousel-photo img { width: 160px; height: 200px; }
+            .carousel-track { gap: 20px; }
+            .letter-content { padding: 30px 20px; width: 100%; max-width: 100%; }
+            .letter-title { font-size: 1.8rem; }
+            .letter-text { font-size: 0.95rem; }
+            .game-container { padding: 20px; }
+            .game-title { font-size: 1.5rem; }
+            .boss-arena { height: 450px; }
+            .boss { width: 100px; height: 100px; }
+            .congratulations h2 { font-size: 2rem; }
+            .congratulations p { font-size: 1.2rem; }
+            .boss-victory-img { width: 150px; height: 150px; }
+            .letter-slot { width: 40px; height: 50px; font-size: 1.5rem; }
+            .key-btn { width: 40px; height: 40px; font-size: 1rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="screen" id="timerScreen">
+        <div class="container">
+            <div class="subtitle">⚡ Обратный отсчёт ⚡</div>
+            <h1>День, когда родилась Легенда</h1>
+            <div class="countdown" id="countdown">
+                <div class="time-box"><span class="time-value" id="days">00</span><span class="time-label">Дней</span></div>
+                <div class="time-box"><span class="time-value" id="hours">00</span><span class="time-label">Часов</span></div>
+                <div class="time-box"><span class="time-value" id="minutes">00</span><span class="time-label">Минут</span></div>
+                <div class="time-box"><span class="time-value" id="seconds">00</span><span class="time-label">Секунд</span></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="screen gift-screen hidden" id="giftScreen">
+        <div class="container">
+            <div class="gift-text">⚡ Залетай, тут кое-что есть </div>
+            <button class="gift-button" onclick="openGift()">🎁</button>
+            <div class="gift-hint">Жми на коробку, не стесняйся!</div>
+        </div>
+    </div>
+
+    <div class="screen letter-screen hidden" id="letterScreen">
+        <div class="letter-container">
+            <div class="letter-content">
+                <h1 class="letter-title">С днём рождения! 🚀</h1>
+                <p class="letter-text">Хоть моя любимая Славя сейчас в армии, я всё равно не могу не поздравить тебя по-особенному. В первую очередь желаю тебе лёгкой службы — без дедовщины и всего подобного, чтобы командиры были адекватные, а сон — не по праздникам)</p>
+                <p class="letter-text">А также желаю, чтобы рядом были нормальные ребята, с которыми можно и посмеяться, и поддержать друг друга. Чтобы этот этап дал тебе только плюс — опыт, выдержку и пару забавных историй в копилку.</p>
+                <p class="letter-text">Пусть в твоей жизни будет больше светлых моментов, меньше заморочек и вообще всё складывается как надо. Вернёшься — отметим как следует)</p>
+                <p class="letter-text">А так главное, чтобы ты всегда шёл по своему правильному пути и никогда не сдавался. С тобой всегда рядом будут близкие люди, которые помогут и поддержат, и гействовать не будут)))</p>
+                <p class="letter-text">А так правда, от всей души хочется поздравить тебя с днём рождения. Надеюсь, то, что я заготовил для тебя на этом сайте, сможет поднять тебе настроение. С днём рождения, бро!</p>
+                <p class="letter-text" style="text-align: center; font-size: 1.5rem; margin-top: 20px;">
+                    😎😎😎😎😎<br>
+                    🍻🍻🍻🍻🍻
+                </p>
+                <div class="letter-signature">Твой бро, гей Кирилл</div>
+                <button class="memories-btn-in-letter" onclick="goToMemories()">🔥 Погнали к воспоминаниям →</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="screen memories-screen hidden" id="memoriesScreen">
+        <div class="memories-container">
+            <h1 class="memories-title">Смехарточки</h1>
+            <div class="carousel-wrapper">
+                <div class="carousel-track">
+                    <div class="carousel-photo"><img src="photo/photo_1.jpg" alt="Фото 11"></div>
+                    <div class="carousel-photo"><img src="photo/photo_2.jpg" alt="Фото 7"></div>
+                    <div class="carousel-photo"><img src="photo/photo_3.jpg" alt="Фото 12"></div>
+                    <div class="carousel-photo"><img src="photo/photo_12.jpg" alt="Фото 8"></div>
+                    <div class="carousel-photo"><img src="photo/photo_4.jpg" alt="Фото 13"></div>
+                    <div class="carousel-photo"><img src="photo/photo_5.jpg" alt="Фото 9"></div>
+                    <div class="carousel-photo"><img src="photo/photo_6.jpg" alt="Фото 14"></div>
+                    <div class="carousel-photo"><img src="photo/photo_7.jpg" alt="Фото 10"></div>
+                    <div class="carousel-photo"><img src="photo/photo_8.jpg" alt="Фото 15"></div>
+                    <div class="carousel-photo"><img src="photo/photo_9.jpg" alt="Фото 16"></div>
+                    <div class="carousel-photo"><img src="photo/photo_10.jpg" alt="Фото 17"></div>
+                    <div class="carousel-photo"><img src="photo/photo_11.jpg" alt="Фото 18"></div>
+                    <div class="carousel-photo"><img src="photo/photo_16.jpg" alt="Фото 11"></div>
+                    <div class="carousel-photo"><img src="photo/photo_1.jpg" alt="Фото 7"></div>
+                    <div class="carousel-photo"><img src="photo/photo_2.jpg" alt="Фото 12"></div>
+                    <div class="carousel-photo"><img src="photo/photo_3jpg" alt="Фото 8"></div>
+                    <div class="carousel-photo"><img src="photo/photo_4.jpg" alt="Фото 13"></div>
+                    <div class="carousel-photo"><img src="photo/photo_5.jpg" alt="Фото 9"></div>
+                </div>
+
+            </div>
+            <button class="get-gift-btn" onclick="startGames()">🎮 Time to play</button>
+        </div>
+    </div>
+
+    <div class="transition-screen" id="transitionScreen">
+        <div class="transition-text" id="transitionText">Загрузка следующего уровня...</div>
+    </div>
+
+    <div class="game-screen" id="memoryGame">
+        <div class="game-container">
+            <h2 class="game-title">Мемори</h2>
+            <p class="game-message" id="memoryMessage">Найди все пары, чел!</p>
+            <div class="memory-grid" id="memoryGrid"></div>
+        </div>
+    </div>
+
+    <div class="game-screen" id="ticTacToeGame">
+        <div class="game-container">
+            <h2 class="game-title">Крестики-нолики</h2>
+            <p class="game-message" id="ticMessage">Твой ход (X)</p>
+            <div class="tic-tac-toe-grid" id="ticGrid"></div>
+        </div>
+    </div>
+
+    <div class="game-screen" id="alienGame">
+        <div class="game-container">
+            <h2 class="game-title">👾 Alien Invasion </h2>
+            <p class="game-message" id="alienMessage">Зачисти сектор от пришельцев!</p>
+            <div class="alien-container">
+                <canvas id="alienCanvas" width="680" height="480"></canvas>
+                <div class="alien-controls-hint">⌨️ ← → движение | ПРОБЕЛ стрельба | 📱 Тап и перетаскивание</div>
+                
+                <div class="mobile-controls">
+                    <div class="control-group">
+                        <button class="control-btn" id="btnLeft"></button>
+                        <button class="control-btn" id="btnRight">▶</button>
+                    </div>
+                    <button class="control-btn fire-btn" id="btnFire">🔥 ОГОНЬ</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="game-screen" id="hangmanGame">
+        <div class="game-container">
+            <h2 class="game-title"> Виселица</h2>
+            <p class="game-message" id="hangmanMessage">Угадай слово! Осталось жизней: 6</p>
+            <div class="hangman-container">
+                <div class="hangman-drawing">
+                    <svg width="200" height="250">
+                        <line x1="20" y1="230" x2="100" y2="230" class="hangman-part" id="part0"/>
+                        <line x1="60" y1="230" x2="60" y2="20" class="hangman-part" id="part1"/>
+                        <line x1="60" y1="20" x2="140" y2="20" class="hangman-part" id="part2"/>
+                        <line x1="140" y1="20" x2="140" y2="50" class="hangman-part" id="part3"/>
+                        <circle cx="140" cy="70" r="20" class="hangman-part" id="part4"/>
+                        <line x1="140" y1="90" x2="140" y2="150" class="hangman-part" id="part5"/>
+                        <line x1="140" y1="100" x2="110" y2="130" class="hangman-part" id="part6"/>
+                        <line x1="140" y1="100" x2="170" y2="130" class="hangman-part" id="part7"/>
+                        <line x1="140" y1="150" x2="120" y2="190" class="hangman-part" id="part8"/>
+                        <line x1="140" y1="150" x2="160" y2="190" class="hangman-part" id="part9"/>
+                    </svg>
+                </div>
+                <div class="word-display" id="wordDisplay"></div>
+                <div class="keyboard" id="keyboard"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="game-screen" id="bossGame">
+        <div class="game-container">
+            <h2 class="game-title">👹 Финальный Босс 👹</h2>
+            <p class="game-message" id="bossMessage">Закликай босса 25 раз, покажи ему, кто тут главный!</p>
+            <div class="boss-arena" id="bossArena">
+                <div class="boss-hp-bar">
+                    <div class="boss-hp-fill" id="bossHpFill" style="width: 100%"></div>
+                    <div class="boss-hp-text" id="bossHpText">100%</div>
+                </div>
+                <div class="boss-counter" id="bossCounter">Удары: 0 / 25</div>
+                <div class="boss" id="boss">
+                    <img src="photo/photo_boss.jpg" alt="Boss" onerror="this.style.display='none';this.parentElement.innerHTML='👹';this.parentElement.style.fontSize='100px';this.parentElement.style.lineHeight='140px';this.parentElement.style.textAlign='center';">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="game-screen" id="bossVictoryScreen">
+        <div class="game-container congratulations">
+            <h2 style="color: #f97316; font-size: 2.5rem; margin-bottom: 30px;">🎉 КРАСАВЧИК! </h2>
+            <div class="boss-victory-img">
+                <img src="photo/photo_boss.jpg" alt="Defeated Boss" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22%3E%3Crect fill=%22%23f97316%22 width=%22200%22 height=%22200%22/%3E%3Ctext fill=%22white%22 font-size=%2280%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22%3E💀%3C/text%3E%3C/svg%3E'">
+            </div>
+            <p style="color: rgba(255,255,255,0.95); font-size: 1.4rem; line-height: 1.6; margin-bottom: 20px;">
+                Ты прошел все испытания!<br>
+                Ты просто машина!<br>
+                С днём рождения, бро! 🎂
+            </p>
+            <div class="hype-animation" style="font-size: 4rem; margin: 30px 0;">🔥🏆🚀</div>
+        </div>
+    </div>
+
+    <script>
+        // Установи правильную дату и время здесь! (Год, Месяц (0-11), День, Часы, Минуты)
+        const TARGET_DATE = new Date(2026, 6, 6, 0, 23, 0);
+        let countdownInterval;
+        let giftAlreadyShown = false;
+
+        function updateCountdown() {
+            const now = new Date();
+            const diff = TARGET_DATE - now;
+            
+            if (diff <= 0) {
+                if (!giftAlreadyShown) {
+                    giftAlreadyShown = true;
+                    showGift();
+                    clearInterval(countdownInterval);
+                }
+                return;
+            }
+            
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+            document.getElementById('days').textContent = String(days).padStart(2, '0');
+            document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+            document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+            document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+        }
+
+        countdownInterval = setInterval(updateCountdown, 1000);
+        updateCountdown();
+
+        function showScreen(screenId) {
+            document.querySelectorAll('.screen').forEach(s => s.classList.add('hidden'));
+            const target = document.getElementById(screenId);
+            target.classList.remove('hidden');
+            target.scrollTop = 0;
+            window.scrollTo(0, 0);
+            document.documentElement.scrollTop = 0;
+            document.body.scrollTop = 0;
+        }
+
+        function showGift() { 
+            showScreen('giftScreen'); 
+        }
+
+        function openGift() {
+            document.getElementById('giftScreen').classList.add('hidden');
+            const letterScreen = document.getElementById('letterScreen');
+            letterScreen.classList.remove('hidden');
+            
+            const scrollToTop = () => {
+                letterScreen.scrollTop = 0;
+                window.scrollTo(0, 0);
+                document.documentElement.scrollTop = 0;
+                document.body.scrollTop = 0;
+            };
+            
+            scrollToTop();
+            setTimeout(scrollToTop, 50);
+            setTimeout(scrollToTop, 100);
+            setTimeout(scrollToTop, 200);
+            setTimeout(scrollToTop, 500);
+        }
+
+        function goToMemories() { 
+            showScreen('memoriesScreen'); 
+        }
+
+        function showTransition(text, nextCallback, delay = 2000) {
+            document.getElementById('transitionText').textContent = text;
+            document.getElementById('transitionScreen').classList.add('active');
+            setTimeout(() => {
+                document.getElementById('transitionScreen').classList.remove('active');
+                nextCallback();
+            }, delay);
+        }
+
+        function startGames() {
+            document.getElementById('memoryGame').classList.add('active');
+            initMemoryGame();
+        }
+
+        // ИСПРАВЛЕНО: Теперь здесь 8 ПАР эмодзи (всего 16 карточек), чтобы игра работала корректно
+        const memoryEmojis = ['🎮', '🎮', '🍕', '🍕', '🚀', '🚀', '🔥', '🔥', '🍻', '🍻', '😎', '😎', '💻', '💻', '🏆', '🏆'];
+        let memoryCards = [];
+        let flippedCards = [];
+        let matchedPairs = 0;
+
+        function initMemoryGame() {
+            memoryCards = [...memoryEmojis].sort(() => Math.random() - 0.5);
+            flippedCards = [];
+            matchedPairs = 0;
+            const grid = document.getElementById('memoryGrid');
+            grid.innerHTML = '';
+            document.getElementById('memoryMessage').textContent = 'Найди все пары, чел!';
+            
+            memoryCards.forEach((emoji, index) => {
+                const card = document.createElement('div');
+                card.className = 'memory-card';
+                card.dataset.index = index;
+                card.dataset.emoji = emoji;
+                card.innerHTML = '<span style="opacity:0">?</span>';
+                card.onclick = () => flipCard(card);
+                grid.appendChild(card);
+            });
+        }
+
+        function flipCard(card) {
+            if (card.classList.contains('flipped') || card.classList.contains('matched') || flippedCards.length >= 2) return;
+            
+            card.classList.add('flipped');
+            card.innerHTML = card.dataset.emoji;
+            flippedCards.push(card);
+            
+            if (flippedCards.length === 2) {
+                if (flippedCards[0].dataset.emoji === flippedCards[1].dataset.emoji) {
+                    setTimeout(() => {
+                        flippedCards.forEach(c => c.classList.add('matched'));
+                        flippedCards = [];
+                        matchedPairs++;
+                        if (matchedPairs === memoryEmojis.length / 2) {
+                            document.getElementById('memoryMessage').textContent = 'Отлично! Переходим дальше...';
+                            setTimeout(() => {
+                                document.getElementById('memoryGame').classList.remove('active');
+                                showTransition(' Следующая игра: Крестики-нолики ⚡', () => {
+                                    document.getElementById('ticTacToeGame').classList.add('active');
+                                    initTicTacToe();
+                                }, 2000);
+                            }, 1000);
+                        }
+                    }, 500);
+                } else {
+                    setTimeout(() => {
+                        flippedCards.forEach(c => {
+                            c.classList.remove('flipped');
+                            c.innerHTML = '<span style="opacity:0">?</span>';
+                        });
+                        flippedCards = [];
+                    }, 1000);
+                }
+            }
+        }
+
+        let ticBoard = [];
+        let currentPlayer = 'X';
+        let gameActive = true;
+
+        function initTicTacToe() {
+            ticBoard = ['', '', '', '', '', '', '', '', ''];
+            currentPlayer = 'X';
+            gameActive = true;
+            document.getElementById('ticMessage').textContent = 'Твой ход (X)';
+            renderTicBoard();
+        }
+
+        function renderTicBoard() {
+            const grid = document.getElementById('ticGrid');
+            grid.innerHTML = '';
+            ticBoard.forEach((cell, index) => {
+                const cellDiv = document.createElement('div');
+                cellDiv.className = `tic-cell ${cell ? 'taken' : ''} ${cell ? cell.toLowerCase() : ''}`;
+                cellDiv.textContent = cell;
+                cellDiv.onclick = () => makeMove(index);
+                grid.appendChild(cellDiv);
+            });
+        }
+
+        function makeMove(index) {
+            if (ticBoard[index] || !gameActive || currentPlayer !== 'X') return;
+            
+            ticBoard[index] = 'X';
+            renderTicBoard();
+            
+            if (checkWinner('X')) {
+                document.getElementById('ticMessage').textContent = 'Ты победил, красавчик! 🎉';
+                gameActive = false;
+                setTimeout(() => {
+                    document.getElementById('ticTacToeGame').classList.remove('active');
+                    showTransition('👾 Следующая игра: Alien Invasion 👾', () => {
+                        document.getElementById('alienGame').classList.add('active');
+                        initAlienGame();
+                    }, 2000);
+                }, 1500);
+            } else if (ticBoard.every(c => c)) {
+                document.getElementById('ticMessage').textContent = 'Ничья! Ну давай ещё раз...';
+                gameActive = false;
+                setTimeout(() => { initTicTacToe(); }, 2000);
+            } else {
+                currentPlayer = 'O';
+                document.getElementById('ticMessage').textContent = 'Мой ход (O)...';
+                setTimeout(computerMove, 800);
+            }
+        }
+
+        function computerMove() {
+            if (!gameActive) return;
+            const emptyIndices = ticBoard.map((c, i) => c === '' ? i : null).filter(i => i !== null);
+            const move = emptyIndices[Math.floor(Math.random() * emptyIndices.length)];
+            ticBoard[move] = 'O';
+            renderTicBoard();
+            
+            if (checkWinner('O')) {
+                document.getElementById('ticMessage').textContent = 'Я победил, но ты держись! 😎 Попробуй ещё раз...';
+                gameActive = false;
+                setTimeout(() => { initTicTacToe(); }, 2000);
+            } else if (ticBoard.every(c => c)) {
+                document.getElementById('ticMessage').textContent = 'Ничья! Ну давай ещё раз...';
+                gameActive = false;
+                setTimeout(() => { initTicTacToe(); }, 2000);
+            } else {
+                currentPlayer = 'X';
+                document.getElementById('ticMessage').textContent = 'Твой ход (X)';
+            }
+        }
+
+        function checkWinner(player) {
+            const wins = [[0,1,2], [3,4,5], [6,7,8], [0,3,6], [1,4,7], [2,5,8], [0,4,8], [2,4,6]];
+            return wins.some(combo => combo.every(i => ticBoard[i] === player));
+        }
+
+        // ===== ALIEN INVASION =====
+        let alienCanvas, alienCtx;
+        let alienPlayer, aliens, alienBullets, alienParticles;
+        let alienKeys = {};
+        let alienGameLoop;
+        let aliensDestroyed = 0;
+        let totalAliens = 15;
+        let alienShootCooldown = 0;
+        let alienRestarting = false;
+        
+        let mobileLeftPressed = false;
+        let mobileRightPressed = false;
+
+        function initAlienGame() {
+            alienCanvas = document.getElementById('alienCanvas');
+            alienCtx = alienCanvas.getContext('2d');
+            
+            if (window.innerWidth < 768) {
+                alienCanvas.width = Math.min(680, window.innerWidth - 80);
+                alienCanvas.height = 400;
+            } else {
+                alienCanvas.width = 680;
+                alienCanvas.height = 480;
+            }
+            
+            alienPlayer = {
+                x: alienCanvas.width / 2 - 25,
+                y: alienCanvas.height - 70,
+                width: 50,
+                height: 50,
+                speed: 7,
+                emoji: '🚀'
+            };
+            
+            aliens = [];
+            alienBullets = [];
+            alienParticles = [];
+            aliensDestroyed = 0;
+            alienShootCooldown = 0;
+            alienRestarting = false;
+            mobileLeftPressed = false;
+            mobileRightPressed = false;
+            
+            for (let row = 0; row < 3; row++) {
+                for (let col = 0; col < 5; col++) {
+                    aliens.push({
+                        x: 60 + col * (alienCanvas.width - 120) / 4,
+                        y: 50 + row * 60,
+                        width: 40,
+                        height: 40,
+                        speed: 2,
+                        direction: 1,
+                        emoji: ['🤖', '🤖', '🤖'][row]
+                    });
+                }
+            }
+            
+            document.addEventListener('keydown', handleAlienKeyDown);
+            document.addEventListener('keyup', handleAlienKeyUp);
+            alienCanvas.addEventListener('touchstart', handleAlienTouch, {passive: false});
+            alienCanvas.addEventListener('touchmove', handleAlienTouch, {passive: false});
+            alienCanvas.addEventListener('click', () => { 
+                if (document.getElementById('alienGame').classList.contains('active')) shootAlienBullet(); 
+            });
+            
+            initMobileControls();
+            
+            const msg = document.getElementById('alienMessage');
+            msg.textContent = 'Зачисти сектор от пришельцев!';
+            msg.style.background = 'rgba(6, 182, 212, 0.15)';
+            msg.style.borderColor = '#06b6d4';
+            
+            alienGameLoop = requestAnimationFrame(updateAlienGame);
+        }
+
+        function initMobileControls() {
+            const btnLeft = document.getElementById('btnLeft');
+            const btnRight = document.getElementById('btnRight');
+            const btnFire = document.getElementById('btnFire');
+            
+            const newBtnLeft = btnLeft.cloneNode(true);
+            btnLeft.parentNode.replaceChild(newBtnLeft, btnLeft);
+            const newBtnRight = btnRight.cloneNode(true);
+            btnRight.parentNode.replaceChild(newBtnRight, btnRight);
+            const newBtnFire = btnFire.cloneNode(true);
+            btnFire.parentNode.replaceChild(newBtnFire, btnFire);
+            
+            const leftBtn = document.getElementById('btnLeft');
+            const startLeft = (e) => {
+                e.preventDefault();
+                mobileLeftPressed = true;
+                leftBtn.classList.add('pressed');
+            };
+            const endLeft = (e) => {
+                e.preventDefault();
+                mobileLeftPressed = false;
+                leftBtn.classList.remove('pressed');
+            };
+            leftBtn.addEventListener('touchstart', startLeft, {passive: false});
+            leftBtn.addEventListener('touchend', endLeft, {passive: false});
+            leftBtn.addEventListener('touchcancel', endLeft, {passive: false});
+            leftBtn.addEventListener('mousedown', startLeft);
+            leftBtn.addEventListener('mouseup', endLeft);
+            leftBtn.addEventListener('mouseleave', endLeft);
+            
+            const rightBtn = document.getElementById('btnRight');
+            const startRight = (e) => {
+                e.preventDefault();
+                mobileRightPressed = true;
+                rightBtn.classList.add('pressed');
+            };
+            const endRight = (e) => {
+                e.preventDefault();
+                mobileRightPressed = false;
+                rightBtn.classList.remove('pressed');
+            };
+            rightBtn.addEventListener('touchstart', startRight, {passive: false});
+            rightBtn.addEventListener('touchend', endRight, {passive: false});
+            rightBtn.addEventListener('touchcancel', endRight, {passive: false});
+            rightBtn.addEventListener('mousedown', startRight);
+            rightBtn.addEventListener('mouseup', endRight);
+            rightBtn.addEventListener('mouseleave', endRight);
+            
+            const fireBtn = document.getElementById('btnFire');
+            const fireAction = (e) => {
+                e.preventDefault();
+                if (document.getElementById('alienGame').classList.contains('active')) {
+                    shootAlienBullet();
+                    fireBtn.classList.add('pressed');
+                    setTimeout(() => fireBtn.classList.remove('pressed'), 150);
+                }
+            };
+            fireBtn.addEventListener('touchstart', fireAction, {passive: false});
+            fireBtn.addEventListener('click', fireAction);
+        }
+
+        function handleAlienKeyDown(e) {
+            alienKeys[e.code] = true;
+            if (e.code === 'Space') {
+                e.preventDefault();
+                shootAlienBullet();
+            }
+        }
+
+        function handleAlienKeyUp(e) {
+            alienKeys[e.code] = false;
+        }
+
+        function handleAlienTouch(e) {
+            e.preventDefault();
+            const rect = alienCanvas.getBoundingClientRect();
+            const touch = e.touches[0];
+            const x = (touch.clientX - rect.left) * (alienCanvas.width / rect.width);
+            alienPlayer.x = x - alienPlayer.width / 2;
+        }
+
+        function shootAlienBullet() {
+            if (alienShootCooldown > 0) return;
+            alienBullets.push({
+                x: alienPlayer.x + alienPlayer.width / 2 - 2,
+                y: alienPlayer.y,
+                width: 4,
+                height: 15,
+                speed: 10
+            });
+            alienShootCooldown = 15;
+        }
+
+        function restartAlienGame() {
+            if (alienRestarting) return;
+            alienRestarting = true;
+            
+            cancelAnimationFrame(alienGameLoop);
+            
+            const msg = document.getElementById('alienMessage');
+            msg.textContent = '❌ Пришельцы прорвались! Начинаем заново...';
+            msg.style.background = 'rgba(239, 68, 68, 0.3)';
+            msg.style.borderColor = '#ef4444';
+            
+            setTimeout(() => {
+                if (document.getElementById('alienGame').classList.contains('active')) {
+                    document.removeEventListener('keydown', handleAlienKeyDown);
+                    document.removeEventListener('keyup', handleAlienKeyUp);
+                    initAlienGame();
+                }
+            }, 2000);
+        }
+
+        function updateAlienGame() {
+            if (!document.getElementById('alienGame').classList.contains('active') || alienRestarting) {
+                cancelAnimationFrame(alienGameLoop);
+                return;
+            }
+
+            alienCtx.fillStyle = 'rgba(2, 6, 23, 0.4)';
+            alienCtx.fillRect(0, 0, alienCanvas.width, alienCanvas.height);
+            
+            if (alienKeys['ArrowLeft'] && alienPlayer.x > 0) alienPlayer.x -= alienPlayer.speed;
+            if (alienKeys['ArrowRight'] && alienPlayer.x < alienCanvas.width - alienPlayer.width) alienPlayer.x += alienPlayer.speed;
+            
+            if (mobileLeftPressed && alienPlayer.x > 0) alienPlayer.x -= alienPlayer.speed;
+            if (mobileRightPressed && alienPlayer.x < alienCanvas.width - alienPlayer.width) alienPlayer.x += alienPlayer.speed;
+            
+            if (alienShootCooldown > 0) alienShootCooldown--;
+            
+            alienBullets = alienBullets.filter(bullet => {
+                bullet.y -= bullet.speed;
+                return bullet.y > -20;
+            });
+            
+            let moveDown = false;
+            let reachedBottom = false;
+            
+            aliens.forEach(alien => {
+                alien.x += alien.speed * alien.direction;
+                if (alien.x <= 10 || alien.x >= alienCanvas.width - alien.width - 10) {
+                    moveDown = true;
+                }
+                if (alien.y + alien.height >= alienCanvas.height - 50) {
+                    reachedBottom = true;
+                }
+            });
+            
+            if (reachedBottom) {
+                restartAlienGame();
+                return;
+            }
+            
+            if (moveDown) {
+                aliens.forEach(alien => {
+                    alien.direction *= -1;
+                    alien.y += 8;
+                });
+            }
+            
+            for (let bIndex = alienBullets.length - 1; bIndex >= 0; bIndex--) {
+                const bullet = alienBullets[bIndex];
+                for (let aIndex = aliens.length - 1; aIndex >= 0; aIndex--) {
+                    const alien = aliens[aIndex];
+                    if (bullet.x < alien.x + alien.width &&
+                        bullet.x + bullet.width > alien.x &&
+                        bullet.y < alien.y + alien.height &&
+                        bullet.y + bullet.height > alien.y) {
+                        
+                        for (let i = 0; i < 10; i++) {
+                            alienParticles.push({
+                                x: alien.x + alien.width/2,
+                                y: alien.y + alien.height/2,
+                                vx: (Math.random() - 0.5) * 10,
+                                vy: (Math.random() - 0.5) * 10,
+                                life: 1,
+                                color: `hsl(${Math.random() * 60 + 160}, 100%, 60%)`
+                            });
+                        }
+                        
+                        aliens.splice(aIndex, 1);
+                        alienBullets.splice(bIndex, 1);
+                        aliensDestroyed++;
+                        
+                        if (aliensDestroyed >= totalAliens) {
+                            cancelAnimationFrame(alienGameLoop);
+                            document.removeEventListener('keydown', handleAlienKeyDown);
+                            document.removeEventListener('keyup', handleAlienKeyUp);
+                            setTimeout(() => {
+                                document.getElementById('alienGame').classList.remove('active');
+                                showTransition(' Следующая игра: Виселица ', () => {
+                                    document.getElementById('hangmanGame').classList.add('active');
+                                    initHangmanGame();
+                                }, 2000);
+                            }, 500);
+                            return;
+                        }
+                        break;
+                    }
+                }
+            }
+            
+            alienParticles = alienParticles.filter(p => {
+                p.x += p.vx;
+                p.y += p.vy;
+                p.life -= 0.02;
+                return p.life > 0;
+            });
+            
+            alienCtx.font = '40px Arial';
+            alienCtx.fillText(alienPlayer.emoji, alienPlayer.x, alienPlayer.y + 35);
+            
+            aliens.forEach(alien => {
+                alienCtx.font = '35px Arial';
+                alienCtx.fillText(alien.emoji, alien.x, alien.y + 32);
+            });
+            
+            alienCtx.fillStyle = '#06b6d4';
+            alienBullets.forEach(bullet => {
+                alienCtx.fillRect(bullet.x, bullet.y, bullet.width, bullet.height);
+            });
+            
+            alienParticles.forEach(p => {
+                alienCtx.fillStyle = p.color;
+                alienCtx.globalAlpha = p.life;
+                alienCtx.beginPath();
+                alienCtx.arc(p.x, p.y, 3, 0, Math.PI * 2);
+                alienCtx.fill();
+            });
+            alienCtx.globalAlpha = 1;
+            
+            alienCtx.fillStyle = '#fff';
+            alienCtx.font = '18px Arial';
+            alienCtx.fillText(`Зачищено: ${aliensDestroyed}/${totalAliens}`, 15, 30);
+            
+            alienGameLoop = requestAnimationFrame(updateAlienGame);
+        }
+
+        // ===== ВИСЕЛИЦА =====
+        const HANGMAN_WORD = 'ПОЗДРАВЛЯЮ';
+        let guessedLetters = [];
+        let wrongGuesses = 0;
+        const maxWrongGuesses = 6;
+
+        function initHangmanGame() {
+            guessedLetters = [];
+            wrongGuesses = 0;
+            document.getElementById('hangmanMessage').textContent = `Угадай слово! Осталось жизней: ${maxWrongGuesses}`;
+            document.querySelectorAll('.hangman-part').forEach(p => p.classList.remove('visible'));
+            renderWord();
+            renderKeyboard();
+        }
+
+        function renderWord() {
+            const display = document.getElementById('wordDisplay');
+            display.innerHTML = '';
+            HANGMAN_WORD.split('').forEach(letter => {
+                const slot = document.createElement('div');
+                slot.className = 'letter-slot';
+                slot.textContent = guessedLetters.includes(letter) ? letter : '';
+                display.appendChild(slot);
+            });
+            
+            if (HANGMAN_WORD.split('').every(l => guessedLetters.includes(l))) {
+                document.getElementById('hangmanMessage').textContent = 'Молодец! Ты угадал, машина! 🎉';
+                document.getElementById('hangmanMessage').style.background = 'rgba(16, 185, 129, 0.3)';
+                document.getElementById('hangmanMessage').style.borderColor = '#10b981';
+                
+                setTimeout(() => {
+                    document.getElementById('hangmanGame').classList.remove('active');
+                    showTransition('👹 Последняя битва: Финальный Босс 👹', () => {
+                        document.getElementById('bossGame').classList.add('active');
+                        initBossGame();
+                    }, 2000);
+                }, 1500);
+            }
+        }
+
+        function renderKeyboard() {
+            const keyboard = document.getElementById('keyboard');
+            keyboard.innerHTML = '';
+            'АБВГДЕЖЗИКЛМНОПРСТУФХЦЧШЩЭЮЯ'.split('').forEach(letter => {
+                const btn = document.createElement('button');
+                btn.className = 'key-btn';
+                btn.textContent = letter;
+                btn.disabled = guessedLetters.includes(letter);
+                if (guessedLetters.includes(letter)) {
+                    btn.classList.add(HANGMAN_WORD.includes(letter) ? 'correct' : 'wrong');
+                }
+                btn.onclick = () => guessLetter(letter);
+                keyboard.appendChild(btn);
+            });
+        }
+
+        function guessLetter(letter) {
+            if (guessedLetters.includes(letter) || wrongGuesses >= maxWrongGuesses) return;
+            guessedLetters.push(letter);
+            
+            if (!HANGMAN_WORD.includes(letter)) {
+                wrongGuesses++;
+                document.getElementById('hangmanMessage').textContent = `Угадай слово! Осталось жизней: ${maxWrongGuesses - wrongGuesses}`;
+                document.getElementById(`part${wrongGuesses - 1}`).classList.add('visible');
+                
+                if (wrongGuesses >= maxWrongGuesses) {
+                    document.getElementById('hangmanMessage').textContent = 'Не сдавайся, бро! Попробуй ещё раз...';
+                    document.getElementById('hangmanMessage').style.background = 'rgba(239, 68, 68, 0.3)';
+                    document.getElementById('hangmanMessage').style.borderColor = '#ef4444';
+                    setTimeout(() => {
+                        initHangmanGame();
+                        document.getElementById('hangmanMessage').style.background = 'rgba(6, 182, 212, 0.15)';
+                        document.getElementById('hangmanMessage').style.borderColor = '#06b6d4';
+                    }, 2000);
+                }
+            }
+            
+            renderWord();
+            renderKeyboard();
+        }
+
+        let bossClicks = 0;
+        const totalBossClicks = 25;
+        let bossX, bossY;
+        let bossVx, bossVy;
+        let bossAnimationId;
+        let bossArena, bossElement;
+
+        function initBossGame() {
+            bossClicks = 0;
+            bossArena = document.getElementById('bossArena');
+            bossElement = document.getElementById('boss');
+            
+            updateBossUI();
+            
+            const arenaWidth = bossArena.offsetWidth;
+            const arenaHeight = bossArena.offsetHeight;
+            const bossSize = 140;
+            bossX = arenaWidth / 2 - bossSize / 2;
+            bossY = arenaHeight / 2 - bossSize / 2;
+            
+            bossVx = (Math.random() > 0.5 ? 1 : -1) * (2 + Math.random() * 2);
+            bossVy = (Math.random() > 0.5 ? 1 : -1) * (2 + Math.random() * 2);
+            
+            bossElement.style.left = bossX + 'px';
+            bossElement.style.top = bossY + 'px';
+            
+            bossElement.onclick = hitBoss;
+            bossElement.ontouchstart = function(e) { e.preventDefault(); hitBoss(e); };
+            
+            moveBoss();
+        }
+
+        function moveBoss() {
+            if (!document.getElementById('bossGame').classList.contains('active')) {
+                cancelAnimationFrame(bossAnimationId);
+                return;
+            }
+
+            const arenaWidth = bossArena.offsetWidth;
+            const arenaHeight = bossArena.offsetHeight;
+            const bossSize = 140;
+            
+            bossX += bossVx;
+            bossY += bossVy;
+            
+            if (bossX <= 0 || bossX >= arenaWidth - bossSize) {
+                bossVx *= -1;
+                bossX = Math.max(0, Math.min(bossX, arenaWidth - bossSize));
+            }
+            if (bossY <= 80 || bossY >= arenaHeight - bossSize) {
+                bossVy *= -1;
+                bossY = Math.max(80, Math.min(bossY, arenaHeight - bossSize));
+            }
+            
+            if (Math.random() < 0.02) {
+                bossVx = (Math.random() > 0.5 ? 1 : -1) * (2 + Math.random() * 3);
+                bossVy = (Math.random() > 0.5 ? 1 : -1) * (2 + Math.random() * 3);
+            }
+            
+            bossElement.style.left = bossX + 'px';
+            bossElement.style.top = bossY + 'px';
+            
+            bossAnimationId = requestAnimationFrame(moveBoss);
+        }
+
+        function hitBoss(e) {
+            e.stopPropagation();
+            bossClicks++;
+            
+            bossElement.classList.remove('hit');
+            void bossElement.offsetWidth;
+            bossElement.classList.add('hit');
+            
+            bossVx *= 1.03;
+            bossVy *= 1.03;
+            
+            const maxSpeed = 9;
+            bossVx = Math.max(-maxSpeed, Math.min(maxSpeed, bossVx));
+            bossVy = Math.max(-maxSpeed, Math.min(maxSpeed, bossVy));
+            
+            const clientX = e.clientX || (e.touches && e.touches[0] ? e.touches[0].clientX : null);
+            const clientY = e.clientY || (e.touches && e.touches[0] ? e.touches[0].clientY : null);
+            showDamage(clientX, clientY);
+            
+            updateBossUI();
+            
+            if (bossClicks >= totalBossClicks) {
+                cancelAnimationFrame(bossAnimationId);
+                bossElement.onclick = null;
+                bossElement.ontouchstart = null;
+                
+                setTimeout(() => {
+                    document.getElementById('bossGame').classList.remove('active');
+                    showTransition('🎉 Ты прошел это! Красавчик! 🎉', () => {
+                        document.getElementById('bossVictoryScreen').classList.add('active');
+                    }, 2000);
+                }, 500);
+            }
+        }
+
+        function showDamage(x, y) {
+            if (!x || !y) return;
+            
+            const damage = document.createElement('div');
+            damage.className = 'damage-number';
+            damage.textContent = '-1';
+            damage.style.left = x + 'px';
+            damage.style.top = y + 'px';
+            document.body.appendChild(damage);
+            
+            setTimeout(() => {
+                damage.remove();
+            }, 1000);
+        }
+
+        function updateBossUI() {
+            const hp = Math.max(0, 100 - (bossClicks / totalBossClicks) * 100);
+            document.getElementById('bossHpFill').style.width = hp + '%';
+            document.getElementById('bossHpText').textContent = Math.round(hp) + '%';
+            document.getElementById('bossCounter').textContent = `Удары: ${bossClicks} / ${totalBossClicks}`;
+            
+            if (hp < 30) {
+                document.getElementById('bossHpFill').style.background = 'linear-gradient(90deg, #ef4444, #f97316)';
+            }
+        }
+    </script>
+</body>
+</html>
